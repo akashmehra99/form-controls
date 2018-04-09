@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.set-margin {
+    margin: 20px;
+}
+
+.err-msg {
+    margin-top: 10px;
+}
+
+.button-css {
+    padding: 10px 50px 10px 50px;
+}

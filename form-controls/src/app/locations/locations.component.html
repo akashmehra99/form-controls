@@ -1,0 +1,96 @@
+<form [formGroup]="locationData" (ngSubmit)="save(locationData)">
+  <div formArrayName="locations">
+    <div class="card set-margin"  *ngFor="let location of locationData.controls.locations.controls; let i=index">
+      <form [formGroup]="location">
+        <div class="card-header">
+          <span>Location - {{i+1}} </span>
+          <button type="button" class="btn btn-link pull-right" *ngIf="locationData.controls.locations.controls.length > 1" (click)="removeAddress(i)">Remove</button>
+        </div>
+        <div class="card-body">    
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control"  formControlName="address" placeholder="Address"
+                   (focus)="locationData.controls.locations.controls[i].controls.address.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.address.touched &&
+                  (locationData.controls.locations.controls[i].controls.address.errors !== null )">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="zipCode" placeholder="Zip Code"
+                  (focus)="locationData.controls.locations.controls[i].controls.zipCode.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.zipCode.touched &&
+                  (locationData.controls.locations.controls[i].controls.zipCode.errors !== null &&  locationData.controls.locations.controls[i].controls.zipCode.errors.required)">
+                    This field is required.
+                  </div>
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.zipCode.touched &&
+                  (locationData.controls.locations.controls[i].controls.zipCode.errors !== null ) &&
+                  (locationData.controls.locations.controls[i].controls.zipCode.errors.minlength || locationData.controls.locations.controls[i].controls.zipCode.errors.maxlength)">
+                    Invalid zipcode.
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="county" placeholder="County"
+                  (focus)="locationData.controls.locations.controls[i].controls.county.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.county.touched &&
+                  (locationData.controls.locations.controls[i].controls.county.errors !== null )">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="city" placeholder="City"
+                  (focus)="locationData.controls.locations.controls[i].controls.city.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.city.touched &&
+                  (locationData.controls.locations.controls[i].controls.city.errors !== null )">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="state" placeholder="State"
+                  (focus)="locationData.controls.locations.controls[i].controls.state.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.state.touched &&
+                  (locationData.controls.locations.controls[i].controls.state.errors !== null )">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="country" placeholder="Country"
+                  (focus)="locationData.controls.locations.controls[i].controls.country.touched = false">
+                  <div class="text-danger err-msg" *ngIf="locationData.controls.locations.controls[i].controls.country.touched &&
+                  (locationData.controls.locations.controls[i].controls.country.errors !== null )">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <app-buildings></app-buildings>
+        </div>        
+      </form>
+    </div>
+  </div>
+  <div class="row add-location-button">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+      <button type="button" class="btn btn-primary add-location-button button-css" (click)="addLocation()" 
+        [disabled]="!locationData.valid">+ Add Location</button>
+    </div>
+  </div>
+  <div class="row add-location-button">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+      <button type="submit" class="btn btn-outline-primary add-location-button button-css" 
+      [disabled]="!locationData.valid">Submit</button>
+     </div>
+  </div>
+</form>
